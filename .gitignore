@@ -1,0 +1,6 @@
+# Compilação
+bin/
+obj/
+
+# Vs Code
+.vscode/
