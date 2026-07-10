@@ -95,4 +95,58 @@ void Agregacao()
 
 }
 
+// Take pegue os x primeiros elementos
+// Skip ignore os x elementos
+void Paginacao()
+{
+    var primeirosClientes = BancoFake.Clientes.Take(3);
+    var produtosBaratos = BancoFake.Produtos.OrderBy(p => p.Preco).Take(5);
+    var segundaPaginaClientes = BancoFake.Clientes.Skip(3).Take(3);
+    var produtosCaros = BancoFake.Produtos.OrderByDescending(p => p.Preco).Take(4);
+}
 
+// GroupBy cria grupos na mesma coleção
+void Group()
+{
+    var clientesNasCidades = BancoFake.Clientes.GroupBy(c => c.Cidade).Select(g => new { Cidade = g.Key, Quantidade = g.Count() });
+    var produtosNasCategorias = BancoFake.Produtos.GroupBy(p => p.CategoriaId).Select(g => new { CategoriaId = g.Key, Quantidade = g.Count() });
+    var precoMedioProdutosDaCategoria = BancoFake.Produtos.GroupBy(p => p.CategoriaId).Select(g => new { CategoriaId = g.Key, PrecoMedio = g.Average(p => p.Preco) });
+    var clienteAtivoNaCidade = BancoFake.Clientes.Where(c => c.Ativo).GroupBy(c => c.Cidade).Select(g => new { Cidade = g.Key, QuantidadeAtivo = g.Count() });
+    var produtoMaisCaroNaCategoria = BancoFake.Produtos.GroupBy(p => p.CategoriaId).Select(g => g.MaxBy(p => p.Preco));
+
+}
+
+// Join junta duas coleções diferentes
+void Join()
+{
+    var clientePedidoData = BancoFake.Pedidos.Join(
+    BancoFake.Clientes,
+    pedido => pedido.ClienteId,
+    cliente => cliente.Id,
+    (pedido, cliente) => new
+    {
+        Cliente = cliente.Nome,
+        pedido.Data
+    });
+
+    var pedidos = BancoFake.Produtos.Join(
+    BancoFake.ItensPedido,
+    produtos => produtos.Id,
+    itenspedidos => itenspedidos.ProdutoId,
+    (produtos, itenspedidos) => new
+    {
+        Nome = produtos.Nome,
+        Quantidade = itenspedidos.Quantidade
+    });
+
+    var clienteNomeCidadePedido = BancoFake.Pedidos.Join(
+    BancoFake.Clientes,
+    pedido => pedido.ClienteId,
+    cliente => cliente.Id,
+    (pedido, cliente) => new
+    {
+        Cliente = cliente.Nome,
+        pedido.Id,
+        Cidade = cliente.Cidade
+    });
+}
