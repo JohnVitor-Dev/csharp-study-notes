@@ -31,9 +31,11 @@ public class ProdutosController : ControllerBase
     [HttpPost]
     public IActionResult Create(CreateProductRequest request)
     {
-        var produto = new Produto(Random.Shared.Next(1, 100), request.Name, request.Price);
+        var service = new ProductService();
+        var produto = service.Create(request);
+        var produtoResponse = new ProductResponse(produto.ID, produto.Name, produto.Price);
 
-        return Ok(produto);
+        return Ok(produtoResponse);
     }
 
 
