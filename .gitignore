@@ -5,3 +5,7 @@ obj/
 # Vs Code
 .vscode/
 
+# NET
+appsettings.Development.json
+Properties/
+Loja.Api.http
