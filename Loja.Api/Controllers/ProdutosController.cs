@@ -21,4 +21,18 @@ public class ProdutosController : ControllerBase
     {
         return Ok(id);
     }
+
+    [HttpGet("search")]
+    public IActionResult Search(string name, decimal minPrice)
+    {
+        return Ok($"Nome: {name} \nMinPrice: {minPrice}");
+    }
+
+    [HttpPost]
+    public IActionResult Create(Produto produto)
+    {
+        return Ok(produto);
+    }
+
+
 }
