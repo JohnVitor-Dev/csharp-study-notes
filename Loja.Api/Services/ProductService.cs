@@ -1,6 +1,6 @@
 using Loja.Api.Models;
 
-public class ProductService
+public class ProductService : IProductService
 {
     public Produto Create(CreateProductRequest request)
     {

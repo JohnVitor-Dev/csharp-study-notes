@@ -7,6 +7,13 @@ namespace Loja.Api.Controllers;
 [Route("api/produtos")]
 public class ProdutosController : ControllerBase
 {
+    private readonly IProductService _service;
+
+    public ProdutosController(IProductService service)
+    {
+        _service = service;
+    }
+
     [HttpGet]
     public IActionResult Get(decimal minPrice, decimal maxPrice)
     {
@@ -31,8 +38,7 @@ public class ProdutosController : ControllerBase
     [HttpPost]
     public IActionResult Create(CreateProductRequest request)
     {
-        var service = new ProductService();
-        var produto = service.Create(request);
+        var produto = _service.Create(request);
         var produtoResponse = new ProductResponse(produto.ID, produto.Name, produto.Price);
 
         return Ok(produtoResponse);
