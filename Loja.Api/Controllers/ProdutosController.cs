@@ -9,6 +9,7 @@ public class ProdutosController : ControllerBase
 {
     private readonly IProductService _service;
 
+
     public ProdutosController(IProductService service)
     {
         _service = service;
@@ -20,7 +21,7 @@ public class ProdutosController : ControllerBase
         if (minPrice > 0 || maxPrice > 0)
             return Ok($"MinPrice: {minPrice} \nMaxPrice: {maxPrice}");
 
-        return Ok(Produto.Produtos);
+        return Ok();
     }
 
     [HttpGet("{id}")]
@@ -39,7 +40,7 @@ public class ProdutosController : ControllerBase
     public IActionResult Create(CreateProductRequest request)
     {
         var produto = _service.Create(request);
-        var produtoResponse = new ProductResponse(produto.ID, produto.Name, produto.Price);
+        var produtoResponse = new ProductResponse(produto.Id, produto.Name, produto.Price);
 
         return Ok(produtoResponse);
     }

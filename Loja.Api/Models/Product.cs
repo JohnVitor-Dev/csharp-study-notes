@@ -3,22 +3,14 @@ namespace Loja.Api.Models;
 public class Produto
 {
 
-    public int ID { get; }
-    public string Name { get; }
-    public decimal Price { get; }
+    public int Id { get; private set; }
+    public string Name { get; private set; }
+    public decimal Price { get; private set; }
 
-    public Produto(int Id, string name, decimal price)
+    public Produto(string name, decimal price)
     {
-        ID = Id;
         Name = name;
         Price = price;
     }
-
-    public static List<Produto> Produtos { get; } =
-    [
-        new Produto(1, "Notebook", 3500m),
-        new Produto(2, "Mouse", 80m),
-        new Produto(3, "Teclado", 150m)
-    ];
 
 }
