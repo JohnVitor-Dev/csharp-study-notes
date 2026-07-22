@@ -7,5 +7,6 @@ obj/
 
 # NET
 appsettings.Development.json
+appsettings.json
 Properties/
 Loja.Api.http

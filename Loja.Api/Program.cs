@@ -5,9 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseInMemoryDatabase("AtlasDb");
-});
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
