@@ -16,24 +16,38 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult Get(decimal minPrice, decimal maxPrice)
+    public IActionResult Get()
     {
-        if (minPrice > 0 || maxPrice > 0)
-            return Ok($"MinPrice: {minPrice} \nMaxPrice: {maxPrice}");
-
-        return Ok();
+        var produtos = _service.GetAll();
+        return Ok(produtos);
     }
 
     [HttpGet("{id}")]
     public IActionResult Get(int id)
     {
-        return Ok(id);
+        var produto = _service.GetById(id);
+
+        if (produto is null)
+            return NotFound();
+
+        return Ok(produto);
     }
 
     [HttpGet("search")]
     public IActionResult Search(string name, decimal minPrice)
     {
         return Ok($"Nome: {name} \nMinPrice: {minPrice}");
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult Update(int id, UpdateProductRequest request)
+    {
+        var produto = _service.Update(id, request);
+
+        if (produto is null)
+            return NotFound();
+
+        return Ok(produto);
     }
 
     [HttpPost]
@@ -43,6 +57,17 @@ public class ProdutosController : ControllerBase
         var produtoResponse = new ProductResponse(produto.Id, produto.Name, produto.Price);
 
         return Ok(produtoResponse);
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var deleted = _service.Delete(id);
+
+        if (!deleted)
+            return NotFound();
+
+        return NoContent();
     }
 
 
