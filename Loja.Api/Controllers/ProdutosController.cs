@@ -22,23 +22,6 @@ public class ProdutosController : ControllerBase
         return Ok(produtos);
     }
 
-    [HttpGet("{id}")]
-    public IActionResult Get(int id)
-    {
-        var produto = _service.GetById(id);
-
-        if (produto is null)
-            return NotFound();
-
-        return Ok(produto);
-    }
-
-    [HttpGet("search")]
-    public IActionResult Search(string name, decimal minPrice)
-    {
-        return Ok($"Nome: {name} \nMinPrice: {minPrice}");
-    }
-
     [HttpPut("{id}")]
     public IActionResult Update(int id, UpdateProductRequest request)
     {
@@ -68,6 +51,30 @@ public class ProdutosController : ControllerBase
             return NotFound();
 
         return NoContent();
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult Get(int id)
+    {
+        var produto = _service.GetById(id);
+
+        if (produto is null)
+            return NotFound();
+
+        return Ok(produto);
+    }
+
+    [HttpGet("search")]
+    public IActionResult Search(string name)
+    {
+        var produtos = _service.Search(name);
+
+        if (!produtos.Any())
+        {
+            return NotFound();
+        }
+
+        return Ok(produtos);
     }
 
 

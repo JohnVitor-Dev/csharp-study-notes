@@ -15,4 +15,10 @@ public interface IProductService
     Produto? UpdatePrice(int id, UpdatePriceProductRequest request);
 
     bool Delete(int id);
+
+    List<Produto> GetProductsAbovePrice(decimal price);
+
+    List<Produto> Search(string name);
+
+    List<Produto> GetOrderedByPrice();
 }

@@ -81,4 +81,29 @@ public class ProductService : IProductService
 
         return true;
     }
+
+    public List<Produto> GetProductsAbovePrice(decimal price)
+    {
+        var query = _context.Produtos.Where(p => p.Price > price);
+        var produtos = query.ToList();
+
+        return produtos;
+    }
+
+    public List<Produto> Search(string name)
+    {
+        var query = _context.Produtos.Where(p => p.Name.Contains(name));
+        var produtos = query.ToList();
+
+        return produtos;
+    }
+
+    public List<Produto> GetOrderedByPrice()
+    {
+        var query = _context.Produtos.OrderBy(p => p.Price);
+        var produtos = query.ToList();
+
+        return produtos;
+    }
+
 }
