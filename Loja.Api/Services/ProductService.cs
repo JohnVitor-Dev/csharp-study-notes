@@ -19,14 +19,27 @@ public class ProductService : IProductService
         return produto;
     }
 
-    public List<Produto> GetAll()
+    public List<ProductResponse> GetAll()
     {
-        return _context.Produtos.ToList();
+        return _context.Produtos
+            .Select(p => new ProductResponse(
+                p.Id,
+                p.Name,
+                p.Price
+            ))
+            .ToList();
     }
 
-    public Produto? GetById(int id)
+    public ProductResponse? GetById(int id)
     {
-        return _context.Produtos.FirstOrDefault(p => p.Id == id);
+        return _context.Produtos
+        .Where(p => p.Id == id)
+        .Select(p => new ProductResponse(
+            p.Id,
+            p.Name,
+            p.Price
+        ))
+        .FirstOrDefault();
     }
 
     public Produto? Update(int id, UpdateProductRequest request)
@@ -82,28 +95,37 @@ public class ProductService : IProductService
         return true;
     }
 
-    public List<Produto> GetProductsAbovePrice(decimal price)
+    public List<ProductResponse> GetProductsAbovePrice(decimal price)
     {
-        var query = _context.Produtos.Where(p => p.Price > price);
-        var produtos = query.ToList();
-
-        return produtos;
+        return _context.Produtos.Where(p => p.Price > price)
+        .Select(p => new ProductResponse(
+            p.Id,
+            p.Name,
+            p.Price
+        ))
+        .ToList();
     }
 
-    public List<Produto> Search(string name)
+    public List<ProductResponse> Search(string name)
     {
-        var query = _context.Produtos.Where(p => p.Name.Contains(name));
-        var produtos = query.ToList();
-
-        return produtos;
+        return _context.Produtos.Where(p => p.Name.Contains(name))
+        .Select(p => new ProductResponse(
+            p.Id,
+            p.Name,
+            p.Price
+        ))
+        .ToList();
     }
 
-    public List<Produto> GetOrderedByPrice()
+    public List<ProductResponse> GetOrderedByPrice()
     {
-        var query = _context.Produtos.OrderBy(p => p.Price);
-        var produtos = query.ToList();
-
-        return produtos;
+        return _context.Produtos.OrderBy(p => p.Price)
+        .Select(p => new ProductResponse(
+            p.Id,
+            p.Name,
+            p.Price
+        ))
+        .ToList();
     }
 
 }

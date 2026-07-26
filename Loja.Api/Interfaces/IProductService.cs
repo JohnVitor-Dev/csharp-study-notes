@@ -4,9 +4,9 @@ public interface IProductService
 {
     Produto Create(CreateProductRequest request);
 
-    List<Produto> GetAll();
+    List<ProductResponse> GetAll();
 
-    Produto? GetById(int id);
+    ProductResponse? GetById(int id);
 
     Produto? Update(int id, UpdateProductRequest request);
 
@@ -16,9 +16,9 @@ public interface IProductService
 
     bool Delete(int id);
 
-    List<Produto> GetProductsAbovePrice(decimal price);
+    List<ProductResponse> GetProductsAbovePrice(decimal price);
 
-    List<Produto> Search(string name);
+    List<ProductResponse> Search(string name);
 
-    List<Produto> GetOrderedByPrice();
+    List<ProductResponse> GetOrderedByPrice();
 }

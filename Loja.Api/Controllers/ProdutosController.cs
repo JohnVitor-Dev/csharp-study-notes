@@ -37,9 +37,15 @@ public class ProdutosController : ControllerBase
     public IActionResult Create(CreateProductRequest request)
     {
         var produto = _service.Create(request);
-        var produtoResponse = new ProductResponse(produto.Id, produto.Name, produto.Price);
 
-        return Ok(produtoResponse);
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = produto.Id },
+            new ProductResponse(
+                produto.Id,
+                produto.Name,
+                produto.Price
+            ));
     }
 
     [HttpDelete("{id}")]
@@ -54,7 +60,7 @@ public class ProdutosController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult Get(int id)
+    public IActionResult GetById(int id)
     {
         var produto = _service.GetById(id);
 

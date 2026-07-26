@@ -10,3 +10,7 @@ appsettings.Development.json
 appsettings.json
 Properties/
 Loja.Api.http
+
+#DB
+loja.db-shm
+loja.db-wal
