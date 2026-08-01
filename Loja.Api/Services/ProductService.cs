@@ -1,4 +1,5 @@
 using Loja.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 public class ProductService : IProductService
 {
@@ -22,6 +23,7 @@ public class ProductService : IProductService
     public List<ProductResponse> GetAll()
     {
         return _context.Produtos
+            .AsNoTracking()
             .Select(p => new ProductResponse(
                 p.Id,
                 p.Name,
@@ -33,6 +35,7 @@ public class ProductService : IProductService
     public ProductResponse? GetById(int id)
     {
         return _context.Produtos
+        .AsNoTracking()
         .Where(p => p.Id == id)
         .Select(p => new ProductResponse(
             p.Id,
@@ -97,7 +100,9 @@ public class ProductService : IProductService
 
     public List<ProductResponse> GetProductsAbovePrice(decimal price)
     {
-        return _context.Produtos.Where(p => p.Price > price)
+        return _context.Produtos
+        .AsNoTracking()
+        .Where(p => p.Price > price)
         .Select(p => new ProductResponse(
             p.Id,
             p.Name,
@@ -108,7 +113,9 @@ public class ProductService : IProductService
 
     public List<ProductResponse> Search(string name)
     {
-        return _context.Produtos.Where(p => p.Name.Contains(name))
+        return _context.Produtos
+        .AsNoTracking()
+        .Where(p => p.Name.Contains(name))
         .Select(p => new ProductResponse(
             p.Id,
             p.Name,
@@ -119,7 +126,9 @@ public class ProductService : IProductService
 
     public List<ProductResponse> GetOrderedByPrice()
     {
-        return _context.Produtos.OrderBy(p => p.Price)
+        return _context.Produtos
+        .AsNoTracking()
+        .OrderBy(p => p.Price)
         .Select(p => new ProductResponse(
             p.Id,
             p.Name,
