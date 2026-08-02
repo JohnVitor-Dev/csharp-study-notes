@@ -6,5 +6,8 @@ public record CreateProductRequest(
     string Name,
 
     [Range(0.01, 100000)]
-    decimal Price
+    decimal Price,
+
+    [Required]
+    int CategoriaId
 );

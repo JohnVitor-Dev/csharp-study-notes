@@ -38,6 +38,9 @@ public class ProdutosController : ControllerBase
     {
         var produto = _service.Create(request);
 
+        if (produto is null)
+            return BadRequest();
+
         return CreatedAtAction(
             nameof(GetById),
             new { id = produto.Id },

@@ -2,7 +2,7 @@ using Loja.Api.Models;
 
 public interface IProductService
 {
-    Produto Create(CreateProductRequest request);
+    Produto? Create(CreateProductRequest request);
 
     List<ProductResponse> GetAll();
 

@@ -10,9 +10,15 @@ public class ProductService : IProductService
         _context = context;
     }
 
-    public Produto Create(CreateProductRequest request)
+    public Produto? Create(CreateProductRequest request)
     {
-        var produto = new Produto(request.Name, request.Price);
+        var categoria = _context.Categorias
+            .FirstOrDefault(c => c.Id == request.CategoriaId);
+
+        if (categoria is null)
+            return null;
+
+        var produto = new Produto(request.Name, request.Price, request.CategoriaId);
 
         _context.Produtos.Add(produto);
         _context.SaveChanges();

@@ -9,4 +9,5 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Produto> Produtos => Set<Produto>();
+    public DbSet<Categoria> Categorias => Set<Categoria>();
 }
