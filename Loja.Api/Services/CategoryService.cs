@@ -10,7 +10,7 @@ public class CategoryService : ICategoryService
         _context = context;
     }
 
-    public Categoria? Create(CreateCategoryRequest request)
+    public Categoria Create(CreateCategoryRequest request)
     {
         var categoria = new Categoria(request.Name);
 

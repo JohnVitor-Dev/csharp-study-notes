@@ -2,7 +2,7 @@ using Loja.Api.Models;
 
 public interface ICategoryService
 {
-    Categoria? Create(CreateCategoryRequest request);
+    Categoria Create(CreateCategoryRequest request);
 
     List<CategoryResponse> GetAll();
 

@@ -38,9 +38,6 @@ public class CategoriasController : ControllerBase
     {
         var categoria = _service.Create(request);
 
-        if (categoria is null)
-            return BadRequest();
-
         return CreatedAtAction(
             nameof(GetById),
             new { id = categoria.Id },
@@ -75,14 +72,14 @@ public class CategoriasController : ControllerBase
     [HttpGet("search")]
     public IActionResult Search(string name)
     {
-        var categoria = _service.Search(name);
+        var categorias = _service.Search(name);
 
-        if (!categoria.Any())
+        if (!categorias.Any())
         {
             return NotFound();
         }
 
-        return Ok(categoria);
+        return Ok(categorias);
     }
 
 

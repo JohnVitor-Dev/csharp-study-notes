@@ -19,7 +19,7 @@ public class Produto
     public void Rename(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-            throw new NullReferenceException("O campo de nome está vazio ou com espaço em branco!");
+            throw new ArgumentException("O campo de nome está vazio ou com espaço em branco!");
 
         Name = name;
     }
