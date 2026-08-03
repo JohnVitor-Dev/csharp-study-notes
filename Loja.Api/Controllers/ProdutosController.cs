@@ -47,7 +47,8 @@ public class ProdutosController : ControllerBase
             new ProductResponse(
                 produto.Id,
                 produto.Name,
-                produto.Price
+                produto.Price,
+                produto.Categoria.Name
             ));
     }
 

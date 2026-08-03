@@ -1,5 +1,6 @@
 public record ProductResponse(
     int Id,
     string Name,
-    decimal Price
+    decimal Price,
+    string CategoryName
 );

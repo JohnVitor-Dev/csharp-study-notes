@@ -33,7 +33,8 @@ public class ProductService : IProductService
             .Select(p => new ProductResponse(
                 p.Id,
                 p.Name,
-                p.Price
+                p.Price,
+                p.Categoria.Name
             ))
             .ToList();
     }
@@ -46,7 +47,8 @@ public class ProductService : IProductService
         .Select(p => new ProductResponse(
             p.Id,
             p.Name,
-            p.Price
+            p.Price,
+            p.Categoria.Name
         ))
         .FirstOrDefault();
     }
@@ -112,7 +114,8 @@ public class ProductService : IProductService
         .Select(p => new ProductResponse(
             p.Id,
             p.Name,
-            p.Price
+            p.Price,
+            p.Categoria.Name
         ))
         .ToList();
     }
@@ -125,7 +128,8 @@ public class ProductService : IProductService
         .Select(p => new ProductResponse(
             p.Id,
             p.Name,
-            p.Price
+            p.Price,
+            p.Categoria.Name
         ))
         .ToList();
     }
@@ -138,7 +142,8 @@ public class ProductService : IProductService
         .Select(p => new ProductResponse(
             p.Id,
             p.Name,
-            p.Price
+            p.Price,
+            p.Categoria.Name
         ))
         .ToList();
     }
